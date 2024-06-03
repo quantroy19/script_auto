@@ -21,7 +21,6 @@
 # sudo apt-get install terminator
 
 ProjectPath="~/path/project_name"
-# ProjectPath="~/Code/personal/quan"
 
 #open Terminal and background the process
 terminator&!
