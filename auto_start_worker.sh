@@ -34,39 +34,60 @@ services=(
   "github/mq mq.go"
 )
 
-# Run the services
+ProjectPath="<PROJECT_PATH>"
 
-# Open Terminal, this is terminal default in Ubuntu
-gnome-terminal &
+if [ "$1" == "true" ]; then
+  for i in {1..12}; do
+    sleep 0.3
+    xdotool key "Ctrl+Up"
+    sleep 0.2
+    xdotool key Ctrl+c
+    sleep 0.2
+    xdotool key Ctrl+l
+    xdotool key Up
+    xdotool key Return
+  done
+else
 
-# Run each service
-for index in "${!services[@]}"; do
-  service=${services[$index]}
-  path=$(echo $service | cut -d' ' -f1)
-  file=$(echo $service | cut -d' ' -f2)
+  # Run the services
 
-  # Execute Docker
-  sleep 1
-  xdotool type "docker exec -it project-worker-1 sh"
-  xdotool key Return
+  # Open Terminal, this is terminal default in Ubuntu
+  gnome-terminal &
 
-  # Change directory to the specified path
-  sleep 0.2
-  xdotool type "cd $path"
-  xdotool key Return
+  # Run each service
+  for index in "${!services[@]}"; do
+    service=${services[$index]}
+    path=$(echo $service | cut -d' ' -f1)
+    file=$(echo $service | cut -d' ' -f2)
 
-  # Run the service
-  sleep 0.2
-  xdotool type "go run $file"
-  xdotool key Return
-
-  # Open a new terminal tab for the next service, unless it's the last service
-  # I've customized the gnome-terminal new tab shortcut to Ctrl+t (default is Ctrl+Shift+t)
-  if ((index < ${#services[@]} - 1)); then
+    # Execute Docker
     sleep 1
-    xdotool key Ctrl+t
-  fi
-done
+    xdotool type "docker exec -it project-worker-1 sh"
+    xdotool key Return
 
-# Maximize the terminal window
-xdotool windowsize $(xdotool getactivewindow) 100% 100%
+    # Change directory to the specified path
+    sleep 0.2
+    xdotool type "cd $path"
+    xdotool key Return
+
+    # Run the service
+    sleep 0.2
+    xdotool type "go run $file"
+    xdotool key Return
+
+   
+    sleep 0.3
+    xdotool key Ctrl+t
+    
+  done
+
+  # Maximize the terminal window
+  xdotool windowsize $(xdotool getactivewindow) 100% 100%
+
+  xdotool type "cd $ProjectPath"
+  sleep 0.3
+  xdotool key Return
+  xdotool type "code ."
+  sleep 0.2
+  xdotool key Return
+fi
