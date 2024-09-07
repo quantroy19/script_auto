@@ -20,7 +20,7 @@
 # sudo apt-get install xdotool
 # sudo apt-get install terminator
 
-ProjectPath="~/path/project_name"
+ProjectPath="<PROJECT_PATH>"
 
 #open Terminal and background the process
 terminator&!
@@ -28,18 +28,18 @@ terminator&!
 sleep 1
 
 # cd to the project
-xdotool type --delay 100 "cd $ProjectPath"  
+xdotool type "cd $ProjectPath"  
 xdotool key Return
-
+sleep 0.5
 # start the project
 xdotool type "make devrun"
 xdotool key Return
 
-sleep 1
+sleep 0.5
 
 # Split the terminal horizontal 
 xdotool key Ctrl+Shift+O
-xdotool type --delay 150 "make devshnode"
+xdotool type "make devshnode"
 xdotool key Return
 xdotool key Ctrl+l
 
@@ -52,7 +52,7 @@ xdotool key Ctrl+Tab
 
 sleep 1
 xdotool key Ctrl+Shift+E
-xdotool type --delay 150 "make devshphp"
+xdotool type "make devshphp"
 xdotool key Return
 xdotool key Ctrl+L
 
@@ -66,4 +66,3 @@ sleep 1
 
 # select Chrome profile
 xdotool mousemove 1580 1215 click 1
-
