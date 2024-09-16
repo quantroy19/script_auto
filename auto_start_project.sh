@@ -20,15 +20,8 @@
 # sudo apt-get install xdotool
 # sudo apt-get install terminator
 
-# Source the .env file to load environment variables
-if [ -f .env ]; then
-  export $(cat .env | xargs)
-else
-  echo ".env file not found. Please create a .env file with the required environment variables."
-  exit 1
-fi
 
-ProjectPath=$PROJECT_PATH
+ProjectPath="/home/<PATH>"
 
 #open Terminal and background the process
 terminator&!
